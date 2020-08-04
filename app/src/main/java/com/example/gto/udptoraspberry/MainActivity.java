@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     //public static final String sIP = "10.0.0.26";   // RaspBerry Pi ip address
     //public static final String sIP = "10.0.0.21";   // Orange Pi ip address
-    public static final String sIP = "10.0.0.28";   // Orange Pi ip address
+    public static final String sIP = "10.0.0.26";   // Orange Pi ip address
     //public static final String sIP = "223.62.219.58";   // S9+ Pi ip address
     public static final int sPORT = 8011;           // Port
 
