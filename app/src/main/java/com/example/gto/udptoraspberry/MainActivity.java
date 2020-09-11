@@ -21,21 +21,28 @@ public class MainActivity extends AppCompatActivity {
 
     //public static final String sIP = "10.0.0.26";   // RaspBerry Pi ip address
     //public static final String sIP = "10.0.0.21";   // Orange Pi ip address
-    //public static final String sIP = "10.0.0.26";   // Orange Pi ip address
-    public static final String sIP = "10.0.0.46";   // Orange Pi ip address
+    //public static final String sIP = "10.0.0.26";   // Nano Pi ip address
+    //public static final String sIP = "10.0.0.46";   // Orange Pi ip address
+    //public static final String sIP = "10.0.0.32";   // Nano Pi ip address
     //public static final String sIP = "223.62.219.58";   // S9+ Pi ip address
+    public static final String sIP = "10.0.0.26";   // Nano Pi ip address
     public static final int sPORT = 8011;           // Port
+    public static String ip_address;
+    public static final String sIP_test = ip_address;
 
     private String msg;
     private String return_msg;
 
     // Send data class
     public SendData mSendData = null;
-
     // display TextView
     public TextView txtView = null;
 
     public EditText sendMsg;
+
+    /*ip address info*/
+    public EditText ip_Num;
+    public TextView ip_text;
 
     public static String write_Msg;
 
@@ -46,10 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
         // button event registration
         Button btnHello = (Button) findViewById(R.id.Hello);
+        Button btn_ip = (Button) findViewById(R.id.ip_btn);
         // textView event registration
         txtView = (TextView) findViewById(R.id.textView);
         // editView event registration
         sendMsg = (EditText) findViewById(R.id.send_msg);
+
+        ip_Num = (EditText) findViewById(R.id.send_ip);
+        ip_text = (TextView) findViewById(R.id.text_ip);
 
         // button clicked
         btnHello.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +77,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_ip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               ip_text.setText(ip_Num.getText());
+               System.out.println("ip address : " + (ip_Num.getText()));
+
+               ip_address = ip_Num.getText().toString();
+
+               System.out.println("return address : " + ip_address);
+
+
+            }
+        });
+
     }
 
     // Thread class for Data send
@@ -76,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 // create UDP communication socket
                 DatagramSocket socket = new DatagramSocket();
                 // sever address variable
-                InetAddress serverAddr = InetAddress.getByName(sIP);
+                InetAddress serverAddr = InetAddress.getByName(ip_address);
 
                 // create send data
                 byte[] buf = write_Msg.getBytes();
