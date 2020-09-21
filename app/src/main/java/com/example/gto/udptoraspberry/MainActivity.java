@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     public EditText ip_Num;
     public TextView ip_text;
 
+    public static byte gto[];
+
     public static String write_Msg;
 
     @Override
@@ -110,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length, serverAddr, sPORT);
                 Log.d("UDP", "sendpacket.... " + "< " +new String(buf) + " >");
 
+                //System.out.print("Send data -> ");
+                byte_to_ascii(buf);
+                //System.out.println();
+
                 // send packet
                 socket.send(packet);
                 Log.d("UDP", "send....");
@@ -117,7 +123,8 @@ public class MainActivity extends AppCompatActivity {
 
                 // wait receive data
                 socket.receive(packet);
-                Log.d("UDP", "Receive" + new String(packet.getData()));
+                Log.d("UDP", "Receive : " + new String(packet.getData()));
+
                 // if receive data -> String change
                 String msg = new String(packet.getData());
 
@@ -129,5 +136,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("UDP", "Client: Error", e);
             }
         }
+    }
+
+    public static void byte_to_ascii(byte[] b){
+        System.out.println("Ascii format : ");
+        for (int i=0; i<b.length; i++){
+            System.out.print((int)b[i] + " ");
+        }
+        System.out.println();
     }
 }
